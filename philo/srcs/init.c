@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:43:39 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/18 14:50:34 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/18 15:01:04 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	init_app(int ac, char **av, t_prog *app)
 	app->dead = 0;
 	app->philos = ft_malloc(sizeof(t_philo) * app->philo_nbr);
 	app->forks = ft_malloc(sizeof(t_mtx) * app->philo_nbr);
-	pthread_mutex_init(&app->write_mtx, NULL);
+	pthread_mutex_init(&app->print, NULL);
 	pthread_mutex_init(&app->app_mtx, NULL);
 	init_philos(app);
 	init_forks(app);
