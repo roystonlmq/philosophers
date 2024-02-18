@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:54:15 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/18 12:54:41 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/18 15:43:31 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	*ft_malloc(size_t size)
 
 	ptr = malloc(size);
 	if (!ptr)
-	{
 		exception("Malloc failed\n");
-	}
 	return (ptr);
 }
