@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/09 18:05:11 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/18 12:41:53 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,28 @@
 # include <unistd.h> // usleep, write
 # include <sys/time.h> // gettimeofday
 
+typedef struct	s_prog
+{
+	long	ttd;
+	long	tte;
+	long	tts;
+	int		philo_nbr;
+	int		eat_limit;
 
+}	t_prog;
+
+typedef struct	s_fork
+{
+	
+}
+
+typedef struct	s_philo
+{
+	int		id;
+	t_fork	*left;
+	t_fork	*right;
+	
+}
+
+void	exception(const char *s);
 #endif
