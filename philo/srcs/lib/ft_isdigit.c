@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 20:30:10 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/18 13:23:17 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/18 13:34:06 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@ int	ft_isdigit(int c)
 int	ft_isnbr(const char *s);
 {
 	int	i;
+	int	slen;
 
 	i = 0;
-	if (s[i] == '-' || s[i] == '+')
+	slen = ft_strlen(s);
+	if (slen > 19)
+		return (0);
+	if (s[i] == '+')
 		i++;
 	while (s[i])
 	{
