@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 12:35:17 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/06 20:22:10 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/19 21:42:54 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ long	ft_atol(const char *nptr)
 int	main(void)
 {
 	const char	*nptr = "	-1aaa234";
-	
+
 	int	res = ft_atoi(nptr);
 	printf("%d", res);
 	printf("actual: %d mine: %d", atoi(nptr), ft_atoi(nptr));
