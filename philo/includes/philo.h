@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/19 21:46:18 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/19 22:00:36 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define THD_JOIN_FAIL "Thread join failed"
 
 typedef struct s_philo	t_philo;
+typedef struct s_fork	t_fork;
 typedef pthread_mutex_t	t_mtx;
 
 typedef enum e_state
@@ -55,11 +56,11 @@ typedef struct	s_prog
 	int			end;
 }	t_prog;
 
-typedef struct	s_fork
+struct	s_fork
 {
 	t_mtx		mtx;
 	int			id;
-}	t_fork;
+};
 
 struct	s_philo
 {
@@ -71,10 +72,10 @@ struct	s_philo
 	int			id;
 	int			eat_count;
 	int			state;
-}	t_philo;
+};
 
 /*
-srcs/lib/*.c
+srcs/lib/wildcard.c
 */
 void	*ft_malloc(size_t size);
 long	ft_atol(const char *str);
@@ -108,10 +109,10 @@ free.c
 /*
 print.c
 */
-void	log(t_philo *philo, char *s);
+void	logger(t_philo *philo, char *s);
 void	think(t_philo *philo);
 void	eat(t_philo *philo);
-void	sleep(t_philo *philo);
+void	psleep(t_philo *philo);
 
 /*
 start.c
@@ -123,6 +124,6 @@ int		ft_state(t_philo *philo);
 /*
 parser.c
 */
-void	check_input(int ac, char **av, t_prog *app);
+void	check_input(t_prog *app, int ac, char **av);
 
 #endif

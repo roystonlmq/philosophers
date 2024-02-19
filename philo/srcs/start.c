@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/19 21:43:09 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/19 22:00:56 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ft_state(t_philo *philo)
 	pthread_mutex_lock(philo->app->meal);
 	if (get_time() - philo->last_eat >= philo->ttd && philo->state != EATING)
 	{
-		log(philo, "died");
+		logger(philo, "died");
 		philo->app->end = 1;
 		pthread_mutex_unlock(philo->app->meal);
 		pthread_mutex_unlock(philo->app->dead);
@@ -76,7 +76,9 @@ void	start(t_prog *app)
 	{
 		if (pthread_create(&app->philo[i].tid, NULL, &start_routine, 
 			&app->philos[i]) != 0)
-			thread_exception()
-		
+			thread_exception();
 	}
+	i = -1;
+	while (++i < app->philo_nbr)
+		pthread_join(app->philos[i].tid, NULL);
 }

@@ -6,7 +6,7 @@
 #    By: roylee <roylee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 16:22:42 by sgoffaux          #+#    #+#              #
-#    Updated: 2024/02/18 14:51:52 by roylee           ###   ########.fr        #
+#    Updated: 2024/02/19 21:55:32 by roylee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ INCLUDE 	=	includes
 CFLAGS		=	-Wall -Wextra -Werror -I$(INCLUDE) -g
 RM			=	rm -f
 SRCS		=	main.c \
-				srcs/error.c srcs/parser.c srcs/free.c srcs/time.c \ 
-				srcs/start.c srcs/init.c \
+				srcs/error.c srcs/init.c srcs/parser.c srcs/time.c \
+				srcs/start.c srcs/parser.c \
 				srcs/lib/ft_atoi.c srcs/lib/ft_strlen.c srcs/lib/ft_isdigit.c \
 				srcs/lib/ft_malloc.c
 

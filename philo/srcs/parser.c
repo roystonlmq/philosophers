@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:43:35 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/18 14:33:43 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/19 21:56:50 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ check_input:
 ./philo	5	800			200			200				7
 			av[1]	av[2]		av[3]		av[4]			av[5]
 */
-void	check_inp(t_prog *app, int ac, char **av)
+void	check_input(t_prog *app, int ac, char **av)
 {
 	int	i;
 
