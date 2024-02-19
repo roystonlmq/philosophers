@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 18:07:20 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/18 14:35:28 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/19 21:41:33 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ int	main(int argc, char **argv)
 		exception("./philo 5 800 200 200 [7]")
 	check_input(&app, argc, argv);
 	init_app(&app, argc, argv);
-	init_philos(&app);
+	start(app);
 }
