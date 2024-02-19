@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:43:39 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/18 15:01:04 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/19 21:25:26 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,18 @@ static void	init_philos(t_prog *app)
 		app->philos[i].eat_count = 0;
 		app->philos[i].last_meal = 0;
 		app->philos[i].last_eat = get_time();
-		pthread_mutex_init(&app->philos[i].philo_mtx, NULL);
+		app->philos[i].state = NONE;
 	}
 }
 
+/*
+init_app
+
+init 3 mutexes for 3 potential race conditions:
+1. writing statuses
+2. checking if dead
+3. eating/meals
+*/
 void	init_app(int ac, char **av, t_prog *app)
 {
 	app->philo_nbr = ft_atol(av[1]);
@@ -63,8 +71,8 @@ void	init_app(int ac, char **av, t_prog *app)
 	app->philos = ft_malloc(sizeof(t_philo) * app->philo_nbr);
 	app->forks = ft_malloc(sizeof(t_mtx) * app->philo_nbr);
 	pthread_mutex_init(&app->print, NULL);
-	pthread_mutex_init(&app->app_mtx, NULL);
+	pthread_mutex_init(&app->dead, NULL);
+	pthread_mutex_init(&app->meal, NULL);
 	init_philos(app);
 	init_forks(app);
-	start(app);
 }
