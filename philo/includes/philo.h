@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/18 15:25:27 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/19 21:46:18 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <unistd.h> // usleep, write
 # include <sys/time.h> // gettimeofday
 
+# define THD_INIT_FAIL "Thread init failed"
+# define THD_JOIN_FAIL "Thread join failed"
+
 typedef struct s_philo	t_philo;
 typedef pthread_mutex_t	t_mtx;
 
@@ -28,9 +31,11 @@ typedef enum e_state
 	THINK,
 	EAT,
 	SLEEP,
-	FORK1,
-	FORK2,
 	DIED,
+	ALL_ATE,
+	NOT_ALL_EATEN,
+	ALIVE,
+	NONE,
 }	t_state;
 
 typedef struct	s_prog
@@ -59,13 +64,13 @@ typedef struct	s_fork
 struct	s_philo
 {
 	pthread_t	tid;
-	t_mtx		philo_mtx;
 	t_fork		*left;
 	t_fork		*right;
 	t_prog		*app;
 	long		last_meal;
 	int			id;
 	int			eat_count;
+	int			state;
 }	t_philo;
 
 /*
@@ -88,6 +93,7 @@ long	get_time(void);
 error.c
 */
 void	exception(const char *s);
+void	thread_exception(const char *s, t_prog *app);
 
 /*
 init.c
@@ -98,6 +104,21 @@ void	init_app(t_prog *app, int ac, char **av);
 free.c
 */
 
+
+/*
+print.c
+*/
+void	log(t_philo *philo, char *s);
+void	think(t_philo *philo);
+void	eat(t_philo *philo);
+void	sleep(t_philo *philo);
+
+/*
+start.c
+*/
+void	start(t_prog *app);
+void	start_routine(void *arg);
+int		ft_state(t_philo *philo);
 
 /*
 parser.c
