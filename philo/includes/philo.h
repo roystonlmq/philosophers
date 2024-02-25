@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/19 22:00:36 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/24 09:43:38 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	thread_exception(const char *s, t_prog *app);
 /*
 init.c
 */
-void	init_app(t_prog *app, int ac, char **av);
+void	init_app(int ac, char **av, t_prog *app);
 
 /*
 free.c
