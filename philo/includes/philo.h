@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/25 12:48:12 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/25 13:20:10 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	init_app(int ac, char **av, t_prog *app);
 /*
 free.c
 */
-
+void	free_app(t_prog *app);
 
 /*
 print.c
