@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/24 09:43:38 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/25 12:48:12 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <unistd.h> // usleep, write
 # include <sys/time.h> // gettimeofday
 
-# define THD_INIT_FAIL "Thread init failed"
+# define THD_CREAT_FAIL "Thread create failed"
 # define THD_JOIN_FAIL "Thread join failed"
 
 typedef struct s_philo	t_philo;
@@ -82,7 +82,7 @@ long	ft_atol(const char *str);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 int		ft_isnbr(const char *s);
-int		ft_strlen(const char *s);
+size_t	ft_strlen(const char *s);
 
 /*
 time.c
@@ -118,7 +118,7 @@ void	psleep(t_philo *philo);
 start.c
 */
 void	start(t_prog *app);
-void	start_routine(void *arg);
+void	*start_routine(void *arg);
 int		ft_state(t_philo *philo);
 
 /*
