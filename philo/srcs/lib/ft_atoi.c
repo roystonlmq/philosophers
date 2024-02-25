@@ -6,11 +6,11 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 12:35:17 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/19 21:42:54 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/25 12:47:29 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "philo.h"
 
 int	ft_atoi(const char *nptr)
 {

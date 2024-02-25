@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roylee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 21:00:30 by roylee            #+#    #+#             */
-/*   Updated: 2023/09/08 22:01:54 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/25 12:47:38 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "philo.h"
 
 size_t	ft_strlen(const char *s)
 {

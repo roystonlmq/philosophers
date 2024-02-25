@@ -6,9 +6,11 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 20:30:10 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/18 13:34:06 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/25 12:49:56 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "philo.h"
 
 int	ft_isdigit(int c)
 {
@@ -17,7 +19,7 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-int	ft_isnbr(const char *s);
+int	ft_isnbr(const char *s)
 {
 	int	i;
 	int	slen;
