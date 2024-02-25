@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:43:35 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/19 21:56:50 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/24 09:46:31 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ check_input:
 */
 void	check_input(t_prog *app, int ac, char **av)
 {
-	int	i;
+	int		i;
+	(void)	app;
+	(void)	ac;
 
 	i = -1;
 	if (ft_atol(av[1]) <= 0)
