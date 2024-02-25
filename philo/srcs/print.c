@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/19 22:00:47 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/24 09:42:45 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->right);
 	logger(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->app->meal);
-	philo->last_eat = get_time();
+	philo->last_meal = get_time();
 	philo->state = EATING;
 	logger(philo, "is eating");
 	philo->eat_count++;
