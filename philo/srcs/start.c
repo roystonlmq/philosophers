@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/24 09:50:35 by roylee           ###   ########.fr       */
+/*   Updated: 2024/02/25 12:47:45 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	all_ate(t_philo *philo)
 			return (ALIVE);
 	}
 	philo->app->end = 1;
+	return (ALL_ATE);
 }
 
 /*
@@ -52,7 +53,7 @@ int		ft_state(t_philo *philo)
 	return (ALIVE);
 }
 
-void	start_routine(void *arg)
+void	*start_routine(void *arg)
 {
 	t_philo *philo;
 
@@ -65,6 +66,7 @@ void	start_routine(void *arg)
 		psleep(philo);
 		think(philo);
 	}
+	return (arg);
 }
 
 void	start(t_prog *app)
@@ -76,9 +78,10 @@ void	start(t_prog *app)
 	{
 		if (pthread_create(&app->philos[i].tid, NULL, &start_routine, 
 			&app->philos[i]) != 0)
-			thread_exception();
+			thread_exception(THD_CREAT_FAIL, app);
 	}
 	i = -1;
 	while (++i < app->philo_nbr)
 		pthread_join(app->philos[i].tid, NULL);
+	return ;
 }
