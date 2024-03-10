@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/10 17:19:32 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/10 18:40:42 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,26 +63,20 @@ checks if philo is dead or all philos ate
 */
 int		ft_state(t_philo *philo)
 {
+	long	t;
+
 	pthread_mutex_lock(&philo->app->meal);
-	pthread_mutex_lock(&philo->app->dead);
-	if (get_time() - philo->last_meal >= philo->app->ttd && philo->state != EAT)
+	t = get_time() - philo->last_meal;
+	if (t >= philo->app->ttd && philo->state != EAT)
 	{
-		printf("test");
 		logger(philo, "died");
+		pthread_mutex_lock(&philo->app->dead);
 		philo->app->end = 1;
 		philo->state = DIED;
-		pthread_mutex_unlock(&philo->app->meal);
 		pthread_mutex_unlock(&philo->app->dead);
+		pthread_mutex_unlock(&philo->app->meal);
 		return (DIED);
 	}
-	else if (all_ate(philo) == ALL_ATE)
-	{
-		philo->app->end = 1;
-		pthread_mutex_unlock(&philo->app->meal);
-		pthread_mutex_unlock(&philo->app->dead);
-		return (ALL_ATE);
-	}
-	printf("hello2\n");
 	pthread_mutex_unlock(&philo->app->meal);
 	return (ALIVE);
 }
@@ -98,7 +92,6 @@ void	*monitor(void *arg)
 		i = -1;
 		while (++i < philos[0].app->philo_nbr)
 		{
-			printf("hello\n");
 			if (ft_state(&philos[i]) == DIED)
 				return (arg);
 		}
