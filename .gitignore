@@ -1,2 +1,4 @@
 */*.o
+*/srcs/*.o
+*/srcs/lib/*.o
 */philo
