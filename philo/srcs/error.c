@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:37:49 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/24 09:35:12 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/10 15:18:53 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,7 @@ void	exception(const char *s)
 
 void	thread_exception(const char *s, t_prog *app)
 {
-	int	i;
-
-	i = -1;
 	write(2, s, ft_strlen(s));
-	pthread_mutex_destroy(&app->print);
-	pthread_mutex_destroy(&app->dead);
-	pthread_mutex_destroy(&app->meal);
-	while (++i < app->philo_nbr)
-		pthread_mutex_destroy((t_mtx *)&app->forks[i]);
+	free_app(app);
 	exit(EXIT_FAILURE);
 }
