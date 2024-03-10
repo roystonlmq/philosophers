@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/24 09:42:45 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/10 16:22:02 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@ void	logger(t_philo *philo, char *s)
 	long	t;
 
 	pthread_mutex_lock(&philo->app->print);
-	time = get_time() - philo->app->start;
+	t = get_time() - philo->app->start;
 	if (!check_dead(philo))
-		printf("%ld %d %s\n", time, philo->id, s);
+	{
+		printf("%ld %d %s\n", t, philo->id, s);
+	}
 	pthread_mutex_unlock(&philo->app->print);
 }
 
 void	think(t_philo *philo)
 {
-	philo->state = THINKING;
+	philo->state = THINK;
 	logger(philo, "is thinking");
 }
 
@@ -34,7 +36,7 @@ void	psleep(t_philo *philo)
 	long	tts;
 
 	tts = philo->app->tts;
-	philo->state = SLEEPING;
+	philo->state = SLEEP;
 	logger(philo, "is sleeping");
 	ft_usleep(tts);
 }
@@ -42,24 +44,24 @@ void	psleep(t_philo *philo)
 
 void	eat(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->left);
+	pthread_mutex_lock(philo->left);
 	logger(philo, "has taken a fork");
-	if (philo->app->philo_num == 1)
+	if (philo->app->philo_nbr == 1)
 	{
 		ft_usleep(philo->app->ttd);
-		pthread_mutex_unlock(&philo->left);
+		pthread_mutex_unlock(philo->left);
 		return ;
 	}
-	pthread_mutex_lock(&philo->right);
+	pthread_mutex_lock(philo->right);
 	logger(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->app->meal);
 	philo->last_meal = get_time();
-	philo->state = EATING;
+	philo->state = EAT;
 	logger(philo, "is eating");
 	philo->eat_count++;
 	philo->state = NONE;
 	ft_usleep(philo->app->tte);
 	pthread_mutex_unlock(&philo->app->meal);
-	pthread_mutex_unlock(&philo->left);
-	pthread_mutex_unlock(&philo->right);
+	pthread_mutex_unlock(philo->left);
+	pthread_mutex_unlock(philo->right);
 }
