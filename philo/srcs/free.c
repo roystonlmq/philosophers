@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 13:39:03 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/10 16:21:03 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/10 18:46:46 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@ void	free_app(t_prog *app)
 		pthread_mutex_destroy(&app->forks[i]);
 	free(app->philos);
 	free(app->forks);
+	free(app);
 }
