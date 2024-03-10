@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/02/25 13:20:10 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/10 16:19:13 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 # define THD_JOIN_FAIL "Thread join failed"
 
 typedef struct s_philo	t_philo;
-typedef struct s_fork	t_fork;
-typedef pthread_mutex_t	t_mtx;
 
 typedef enum e_state
 {
@@ -39,39 +37,36 @@ typedef enum e_state
 	NONE,
 }	t_state;
 
+
 typedef struct	s_prog
 {
-	pthread_t	*threads;
-	t_philo		*philos;
-	t_fork		*forks;
-	t_mtx		print;
-	t_mtx		dead;
-	t_mtx		meal;
-	long		ttd;
-	long		tte;
-	long		tts;
-	long		start;
-	int			philo_nbr;
-	int			eat_limit;
-	int			end;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	print;
+	pthread_mutex_t	dead;
+	pthread_mutex_t	meal;
+	pthread_t		*threads;
+	t_philo			*philos;
+	long			ttd;
+	long			tte;
+	long			tts;
+	long			start;
+	int				philo_nbr;
+	int				eat_limit;
+	int				end;
 }	t_prog;
 
-struct	s_fork
-{
-	t_mtx		mtx;
-	int			id;
-};
+
 
 struct	s_philo
 {
-	pthread_t	tid;
-	t_fork		*left;
-	t_fork		*right;
-	t_prog		*app;
-	long		last_meal;
-	int			id;
-	int			eat_count;
-	int			state;
+	pthread_mutex_t		*left;
+	pthread_mutex_t		*right;
+	pthread_t			tid;
+	t_prog				*app;
+	long				last_meal;
+	int					id;
+	int					eat_count;
+	int					state;
 };
 
 /*
@@ -99,7 +94,7 @@ void	thread_exception(const char *s, t_prog *app);
 /*
 init.c
 */
-void	init_app(int ac, char **av, t_prog *app);
+t_prog	*init_app(int ac, char **av);
 
 /*
 free.c
@@ -119,11 +114,12 @@ start.c
 */
 void	start(t_prog *app);
 void	*start_routine(void *arg);
-int		ft_state(t_philo *philo);
+// int		ft_state(t_philo *philo);
+int		check_dead(t_philo *philo);
 
 /*
 parser.c
 */
-void	check_input(t_prog *app, int ac, char **av);
+void	check_input(int ac, char **av);
 
 #endif
