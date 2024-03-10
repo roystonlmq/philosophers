@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/10 18:40:42 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/10 19:57:37 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int	all_ate(t_philo *philos)
 
 	i = -1;
 	n = 0;
+	printf("all_ate func\n");
 	if (philos[0].app->eat_limit == -1)
 		return (NOT_ALL_EATEN);
 	while (++i < philos[0].app->philo_nbr)
@@ -65,6 +66,7 @@ int		ft_state(t_philo *philo)
 {
 	long	t;
 
+	printf("ft_state func\n");
 	pthread_mutex_lock(&philo->app->meal);
 	t = get_time() - philo->last_meal;
 	if (t >= philo->app->ttd && philo->state != EAT)
@@ -89,6 +91,8 @@ void	*monitor(void *arg)
 	philos = (t_philo *)arg;
 	while (1)
 	{
+		printf("monitor func\n");
+		fflush(stdout);
 		i = -1;
 		while (++i < philos[0].app->philo_nbr)
 		{
@@ -106,10 +110,11 @@ void	*monitor(void *arg)
 	return (arg);
 }
 
-int		check_dead(t_philo *philo)
+int		check_end(t_philo *philo)
 {
 	int	end;
 
+	// printf("check_dead func\n");
 	pthread_mutex_lock(&philo->app->dead);
 	end = philo->app->end;
 	pthread_mutex_unlock(&philo->app->dead);
@@ -123,11 +128,12 @@ void	*start_routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
 		ft_usleep(100);
-	while (!check_dead(philo))
+	while (check_end(philo) == 0)
 	{
 		eat(philo);
 		psleep(philo);
 		think(philo);
+		// printf("start_routine func\n");
 	}
 	return (arg);
 }
@@ -137,9 +143,6 @@ void	start(t_prog *app)
 	pthread_t	watch;
 	int			i;
 
-	// printf("%d\n", app->end);
-	if (pthread_create(&watch, NULL, &monitor, app->philos) != 0)
-		thread_exception(THD_CREAT_FAIL, app);
 	i = -1;
 	while (++i < app->philo_nbr)
 	{
@@ -147,6 +150,8 @@ void	start(t_prog *app)
 				&app->philos[i]) != 0)
 			thread_exception(THD_CREAT_FAIL, app);
 	}
+	if (pthread_create(&watch, NULL, &monitor, app->philos) != 0)
+		thread_exception(THD_CREAT_FAIL, app);
 	if (pthread_join(watch, NULL) != 0)
 		thread_exception(THD_JOIN_FAIL, app);
 	i = -1;
