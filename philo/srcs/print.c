@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/10 16:22:02 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/10 18:44:53 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void	logger(t_philo *philo, char *s)
 
 void	think(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->app->dead);
 	philo->state = THINK;
+	pthread_mutex_unlock(&philo->app->dead);
 	logger(philo, "is thinking");
 }
 
@@ -36,7 +38,9 @@ void	psleep(t_philo *philo)
 	long	tts;
 
 	tts = philo->app->tts;
+	pthread_mutex_lock(&philo->app->dead);
 	philo->state = SLEEP;
+	pthread_mutex_unlock(&philo->app->dead);
 	logger(philo, "is sleeping");
 	ft_usleep(tts);
 }
