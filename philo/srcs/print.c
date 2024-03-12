@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/12 21:00:32 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/12 21:05:18 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,6 @@ void	psleep(t_philo *philo)
 	long	tts;
 
 	tts = philo->app->tts;
-	pthread_mutex_lock(&philo->app->dead);
-	philo->state = SLEEP;
-	pthread_mutex_unlock(&philo->app->dead);
 	logger(philo, "is sleeping");
 	ft_usleep(tts);
 }
@@ -55,13 +52,9 @@ void	eat(t_philo *philo)
 	logger(philo, "is eating");
 	pthread_mutex_lock(&philo->app->meal);
 	philo->last_meal = get_time();
-	philo->state = EAT;
 	philo->eat_count++;
 	pthread_mutex_unlock(&philo->app->meal);
 	ft_usleep(philo->app->tte);
-	pthread_mutex_lock(&philo->app->meal);
-	philo->state = NONE;
-	pthread_mutex_unlock(&philo->app->meal);
 	pthread_mutex_unlock(philo->left);
 	pthread_mutex_unlock(philo->right);
 }
