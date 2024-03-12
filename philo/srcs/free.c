@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 13:39:03 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/10 18:46:46 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/12 23:49:12 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,9 @@ void	free_app(t_prog *app)
 {
 	int	i;
 
-	i = -1;
-	while (++i < app->philo_nbr)
-	{
-		pthread_mutex_destroy(&app->meal);
-		pthread_mutex_destroy(&app->dead);
-		pthread_mutex_destroy(&app->print);
-	}
+	pthread_mutex_destroy(&app->meal);
+	pthread_mutex_destroy(&app->dead);
+	pthread_mutex_destroy(&app->print);
 	i = -1;
 	while (++i < app->philo_nbr)
 		pthread_mutex_destroy(&app->forks[i]);
