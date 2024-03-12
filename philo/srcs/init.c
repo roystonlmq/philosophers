@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:43:39 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/10 16:21:42 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/12 21:25:12 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ static void	init_philos(t_prog *app)
 		app->philos[i].id = i + 1;
 		app->philos[i].app = app;
 		app->philos[i].eat_count = 0;
+		app->philos[i].eat_limit = app->eat_limit;
 		app->philos[i].last_meal = get_time();
 		app->philos[i].state = NONE;
-		
+		app->philos[i].philo_nbr = app->philo_nbr;
 	}
 }
 
@@ -60,6 +61,10 @@ t_prog	*init_app(int ac, char **av)
 	app = ft_malloc(sizeof(t_prog));
 	app->threads = NULL;
 	app->philo_nbr = ft_atol(av[1]);
+	if (ac == 6)
+		app->eat_limit = ft_atol(av[5]);
+	else
+		app->eat_limit = -1;
 	app->philos = ft_malloc(sizeof(t_philo) * app->philo_nbr);
 	init_philos(app);
 	app->forks = ft_malloc(sizeof(pthread_mutex_t) * app->philo_nbr);
@@ -68,10 +73,6 @@ t_prog	*init_app(int ac, char **av)
 	app->tte = ft_atol(av[3]);
 	app->tts = ft_atol(av[4]);
 	app->start = get_time();
-	if (ac == 6)
-		app->eat_limit = ft_atol(av[5]);
-	else
-		app->eat_limit = -1;
 	app->end = 0;
 	pthread_mutex_init(&app->meal, NULL);
 	pthread_mutex_init(&app->dead, NULL);
