@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:43:39 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/12 21:25:12 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/12 22:27:42 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ init_app
 */
 t_prog	*init_app(int ac, char **av)
 {
-	t_prog *app;
+	t_prog	*app;
 
 	app = ft_malloc(sizeof(t_prog));
 	app->threads = NULL;
