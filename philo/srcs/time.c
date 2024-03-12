@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:24:40 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/10 16:06:05 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/11 22:02:45 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ int		ft_usleep(long time)
 
 	start = get_time();
 	while ((get_time() - start) < time)
-	{
-		// printf("now: %ld\n, tgt: %ld\n", get_time() - start, time);
-		usleep(500);
-	}
+		usleep(time / 10);
 	return (0);
 }
