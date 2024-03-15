@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:24:40 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/16 00:32:56 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/16 01:06:00 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ int		ft_usleep(long time)
 
 	start = get_time();
 	while ((get_time() - start) < time)
-		usleep(100);
+		usleep(time / 10);
 	return (0);
 }
