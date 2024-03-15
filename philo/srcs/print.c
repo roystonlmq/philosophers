@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/16 00:48:39 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/16 01:11:01 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,30 @@ void	logger(t_philo *philo, char *s)
 	e = check_end(philo);
 	pthread_mutex_lock(&philo->app->print);
 		// printf("never got here");
-	if (e == 0)
+	t = get_time() - philo->app->start;
+	if (e == 0 && t >= 0 && t <= LONG_MAX)
 	{
-		t = get_time() - philo->app->start;
 		printf("%ld %d %s\n", t, philo->id, s);
 	}
 	pthread_mutex_unlock(&philo->app->print);
 }
 
+int	check_state(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->state_lock);
+	if (philo->state == DIED)
+	{
+		pthread_mutex_unlock(&philo->state_lock);
+		return (DIED);
+	}
+	pthread_mutex_unlock(&philo->state_lock);
+	return (ALIVE);
+}
+
 void	think(t_philo *philo)
 {
+	if (check_state(philo) == DIED)
+		return ;
 	update_state(philo, THINK);
 	logger(philo, "is thinking");
 	if (philo->app->philo_nbr % 2 != 0)
@@ -51,6 +65,8 @@ void	psleep(t_philo *philo)
 {
 	long	tts;
 
+	if (check_state(philo) == DIED)
+		return ;
 	update_state(philo, SLEEP);
 	tts = philo->app->tts;
 	logger(philo, "is sleeping");
@@ -60,6 +76,8 @@ void	psleep(t_philo *philo)
 
 void	eat(t_philo *philo)
 {
+	if (check_state(philo) == DIED)
+		return ;
 	pthread_mutex_lock(philo->left);
 	logger(philo, "has taken a fork");
 	if (philo->app->philo_nbr == 1)
