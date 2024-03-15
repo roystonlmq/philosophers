@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/12 21:17:08 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/16 00:35:05 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ struct	s_philo
 {
 	pthread_mutex_t		*left;
 	pthread_mutex_t		*right;
+	pthread_mutex_t		state_lock;
 	pthread_t			tid;
 	t_prog				*app;
 	long				last_meal;
@@ -106,6 +107,7 @@ void	free_app(t_prog *app);
 /*
 print.c
 */
+void	update_state(t_philo *philo, int state);
 void	logger(t_philo *philo, char *s);
 void	think(t_philo *philo);
 void	eat(t_philo *philo);
@@ -116,8 +118,10 @@ start.c
 */
 void	start(t_prog *app);
 void	*start_routine(void *arg);
-// int		ft_state(t_philo *philo);
-int		check_end(t_philo *philo);
+void	*monitor(void *arg);
+int		ft_state(t_philo *philo);
+int		check_end(t_philo *app);
+void	set_end(t_prog *app);
 
 /*
 parser.c
