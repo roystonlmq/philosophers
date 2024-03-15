@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/16 00:35:05 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/16 01:05:41 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 //pthread_mutex_lock, pthread_mutex_unlock, pthread_mutex_destroy
 # include <unistd.h> // usleep, write
 # include <sys/time.h> // gettimeofday
+# include <limits.h> // INT_MAX
 
 # define THD_CREAT_FAIL "Thread create failed"
 # define THD_JOIN_FAIL "Thread join failed"
