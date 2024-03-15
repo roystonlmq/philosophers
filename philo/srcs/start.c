@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/16 00:49:51 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/16 01:03:20 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		ft_state(t_philo *philo)
 	if (t >= philo->app->ttd && s != EAT)
 	{
 		logger(philo, "died");
+		update_state(philo, DIED);
 		set_end(philo->app);
 		return (DIED);
 	}
