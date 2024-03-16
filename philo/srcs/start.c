@@ -6,15 +6,23 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/16 11:59:27 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/16 12:15:36 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+static void	get_philo_ate_cnt(t_philo philo, int *n)
+{
+	pthread_mutex_lock(&philo.app->meal);
+	if (philo.eat_count >= philo.app->eat_limit)
+		(*n)++;
+	pthread_mutex_unlock(&philo.app->meal);
+}
+
 void	*monitor(void *arg)
 {
-	t_philo *philos;
+	t_philo	*philos;
 	int		i;
 	int		n;
 	int		e;
@@ -31,20 +39,15 @@ void	*monitor(void *arg)
 				e = 0;
 			if (philos[0].app->eat_limit == -1)
 				continue ;
-			pthread_mutex_lock(&philos[0].app->meal);
-			if (philos[i].eat_count >= philos[0].app->eat_limit)
-				n++;
-			pthread_mutex_unlock(&philos[0].app->meal);
+			get_philo_ate_cnt(philos[i], &n);
 			if (philos[0].app->philo_nbr == n)
-				((e = 0), set_end(philos[0].app));
+				e = 0;
 			if (e == 0)
 				break ;
 		}
 	}
 	return (arg);
 }
-
-
 
 void	*start_routine(void *arg)
 {
