@@ -46,8 +46,4 @@ fclean:			localclean
 
 re:				fclean all
 
-debug:			CFLAGS += -fsanitize=thread
-				$(CC) $(CFLAGS) -g $(SRCS) -o $(NAME)
-				@echo "Linked into executable \033[0;32mphilo\033[0m."
-
 .PHONY:			all clean fclean re localclean bonus

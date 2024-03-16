@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/16 12:01:13 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/16 13:21:00 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	free_app(t_prog *app);
 state.c
 */
 int		ft_state(t_philo *philo);
+int		check_state(t_philo *philo);
 int		check_end(t_philo *app);
 void	update_state(t_philo *philo, int state);
 void	set_end(t_prog *app);
