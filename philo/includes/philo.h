@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/16 01:05:41 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/16 11:47:30 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ typedef enum e_state
 	NONE,
 }	t_state;
 
-
-typedef struct	s_prog
+typedef struct s_prog
 {
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
@@ -55,8 +54,6 @@ typedef struct	s_prog
 	int				eat_limit;
 	int				end;
 }	t_prog;
-
-
 
 struct	s_philo
 {
