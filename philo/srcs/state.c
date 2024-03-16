@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:57:35 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/16 12:00:21 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/16 13:35:56 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	check_state(t_philo *philo)
 {
+	int	s;
+
 	pthread_mutex_lock(&philo->state_lock);
-	if (philo->state == DIED)
-	{
-		pthread_mutex_unlock(&philo->state_lock);
-		return (DIED);
-	}
+	s = philo->state;
 	pthread_mutex_unlock(&philo->state_lock);
+	if (s == DIED)
+		return (DIED);
 	return (ALIVE);
 }
 
