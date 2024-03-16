@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/16 11:47:30 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/16 12:01:13 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,18 @@ struct	s_philo
 /*
 srcs/lib/wildcard.c
 */
-void	*ft_malloc(size_t size);
 long	ft_atol(const char *str);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 int		ft_isnbr(const char *s);
 size_t	ft_strlen(const char *s);
+void	*ft_malloc(size_t size);
 
 /*
 time.c
 */
-int		ft_usleep(long time);
 long	get_time(void);
+int		ft_usleep(long time);
 
 /*
 error.c
@@ -103,9 +103,16 @@ free.c
 void	free_app(t_prog *app);
 
 /*
+state.c
+*/
+int		ft_state(t_philo *philo);
+int		check_end(t_philo *app);
+void	update_state(t_philo *philo, int state);
+void	set_end(t_prog *app);
+
+/*
 print.c
 */
-void	update_state(t_philo *philo, int state);
 void	logger(t_philo *philo, char *s);
 void	think(t_philo *philo);
 void	eat(t_philo *philo);
@@ -117,9 +124,6 @@ start.c
 void	start(t_prog *app);
 void	*start_routine(void *arg);
 void	*monitor(void *arg);
-int		ft_state(t_philo *philo);
-int		check_end(t_philo *app);
-void	set_end(t_prog *app);
 
 /*
 parser.c

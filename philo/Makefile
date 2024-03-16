@@ -14,11 +14,11 @@ NAME		=	philo
 
 CC			=	gcc
 INCLUDE 	=	includes
-CFLAGS		=	-Wall -Wextra -Werror -I$(INCLUDE) -g #-fsanitize=thread
+CFLAGS		=	-Wall -Wextra -Werror -I$(INCLUDE) -g -fsanitize=thread
 RM			=	rm -f
 SRCS		=	main.c \
 				srcs/error.c srcs/init.c srcs/parser.c srcs/time.c \
-				srcs/start.c srcs/print.c srcs/free.c \
+				srcs/start.c srcs/print.c srcs/free.c srcs/state.c \
 				srcs/lib/ft_atoi.c srcs/lib/ft_strlen.c srcs/lib/ft_isdigit.c \
 				srcs/lib/ft_malloc.c
 
@@ -45,5 +45,9 @@ fclean:			localclean
 				@echo "Removed executable."
 
 re:				fclean all
+
+debug:			CFLAGS += -fsanitize=thread
+				$(CC) $(CFLAGS) -g $(SRCS) -o $(NAME)
+				@echo "Linked into executable \033[0;32mphilo\033[0m."
 
 .PHONY:			all clean fclean re localclean bonus
