@@ -6,46 +6,25 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/16 01:11:01 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/16 11:58:53 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	update_state(t_philo *philo, int state)
-{
-	pthread_mutex_lock(&philo->state_lock);
-	philo->state = state;
-	pthread_mutex_unlock(&philo->state_lock);
-}
 
 void	logger(t_philo *philo, char *s)
 {
 	long	t;
 	int		e;
 
-	// printf("e: %d\n", check_end(philo));
 	e = check_end(philo);
 	pthread_mutex_lock(&philo->app->print);
-		// printf("never got here");
 	t = get_time() - philo->app->start;
 	if (e == 0 && t >= 0 && t <= LONG_MAX)
 	{
 		printf("%ld %d %s\n", t, philo->id, s);
 	}
 	pthread_mutex_unlock(&philo->app->print);
-}
-
-int	check_state(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->state_lock);
-	if (philo->state == DIED)
-	{
-		pthread_mutex_unlock(&philo->state_lock);
-		return (DIED);
-	}
-	pthread_mutex_unlock(&philo->state_lock);
-	return (ALIVE);
 }
 
 void	think(t_philo *philo)
@@ -92,7 +71,7 @@ void	eat(t_philo *philo)
 	logger(philo, "is eating");
 	pthread_mutex_lock(&philo->app->meal);
 	philo->eat_count++;
- 	philo->last_meal = get_time();
+	philo->last_meal = get_time();
 	pthread_mutex_unlock(&philo->app->meal);
 	ft_usleep(philo->app->tte);
 	if (philo->app->ttd < philo->app->tte)
