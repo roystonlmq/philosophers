@@ -6,22 +6,22 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/16 13:46:36 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/16 13:48:18 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	get_philo_ate_cnt(t_philo philo)
+static void	get_philo_ate_cnt(t_philo philo, int *n)
 {
-	int	n;
+	// int	n;
 
-	n = 0;
+	// n = 0;
 	pthread_mutex_lock(&philo.app->meal);
 	if (philo.eat_count >= philo.app->eat_limit)
-		n++;
+		(*n)++;
 	pthread_mutex_unlock(&philo.app->meal);
-	return (n);
+	// return (n);
 }
 
 void	*monitor(void *arg)
@@ -43,7 +43,7 @@ void	*monitor(void *arg)
 				e = 0;
 			if (philos[0].app->eat_limit == -1)
 				continue ;
-			n += get_philo_ate_cnt(philos[i]);
+			get_philo_ate_cnt(philos[i], &n);
 			if (philos[0].app->philo_nbr == n)
 				e = 0;
 			if (e == 0)
