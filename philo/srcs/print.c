@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 18:06:38 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:08:15 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ void	eat(t_philo *philo)
 	if (philo->app->philo_nbr == 1)
 	{
 		ft_usleep(philo->app->ttd);
-		pthread_mutex_unlock(philo->sec);
+		pthread_mutex_unlock(philo->second);
 		return ;
 	}
-	pthread_mutex_lock(philo->sec);
+	pthread_mutex_lock(philo->second);
 	logger(philo, "has taken a fork");
 	update_state(philo, EAT);
 	logger(philo, "is eating");
@@ -92,5 +92,5 @@ void	eat(t_philo *philo)
 		ft_usleep(philo->app->ttd);
 	update_state(philo, NONE);
 	pthread_mutex_unlock(philo->first);
-	pthread_mutex_unlock(philo->sec);
+	pthread_mutex_unlock(philo->second);
 }
