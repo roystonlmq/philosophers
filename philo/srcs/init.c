@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:43:39 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 12:59:48 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 13:15:55 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	init_forks(t_prog *app)
 	}
 }
 
-// can try to init mutexes on app level instead of philo level
 static void	init_philos(t_prog *app)
 {
 	int	i;
@@ -55,23 +54,22 @@ t_prog	*init_app(int ac, char **av)
 	t_prog	*app;
 
 	app = ft_malloc(sizeof(t_prog));
-	app->threads = NULL;
 	app->philo_nbr = ft_atol(av[1]);
+	app->ttd = ft_atol(av[2]);
+	app->tte = ft_atol(av[3]);
+	app->tts = ft_atol(av[4]);
 	if (ac == 6)
 		app->eat_limit = ft_atol(av[5]);
 	else
 		app->eat_limit = -1;
 	app->philos = ft_malloc(sizeof(t_philo) * app->philo_nbr);
-	init_philos(app);
 	app->forks = ft_malloc(sizeof(pthread_mutex_t) * app->philo_nbr);
+	init_philos(app);
 	init_forks(app);
-	app->ttd = ft_atol(av[2]);
-	app->tte = ft_atol(av[3]);
-	app->tts = ft_atol(av[4]);
-	app->start = get_time();
 	app->end = 0;
 	pthread_mutex_init(&app->meal, NULL);
 	pthread_mutex_init(&app->dead, NULL);
 	pthread_mutex_init(&app->print, NULL);
+	app->start = get_time();
 	return (app);
 }
