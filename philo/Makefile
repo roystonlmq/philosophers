@@ -14,7 +14,7 @@ NAME		=	philo
 
 CC			=	gcc
 INCLUDE 	=	includes
-CFLAGS		=	-Wall -Wextra -Werror -I$(INCLUDE) -g -fsanitize=thread
+CFLAGS		=	-Wall -Wextra -Werror -I$(INCLUDE) -g #-fsanitize=address
 RM			=	rm -f
 SRCS		=	main.c \
 				srcs/error.c srcs/init.c srcs/parser.c srcs/time.c \
