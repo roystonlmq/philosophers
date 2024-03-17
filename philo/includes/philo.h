@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/16 13:21:00 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 13:16:27 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_prog
 	pthread_mutex_t	print;
 	pthread_mutex_t	dead;
 	pthread_mutex_t	meal;
-	pthread_t		*threads;
 	t_philo			*philos;
 	long			ttd;
 	long			tte;
