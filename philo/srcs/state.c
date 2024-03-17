@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:57:35 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/16 13:35:56 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:13:47 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ void	update_state(t_philo *philo, int state)
 	pthread_mutex_unlock(&philo->state_lock);
 }
 
-/*
-checks if philo is dead or all philos ate
-*/
+
 int	ft_state(t_philo *philo)
 {
 	long	t;
@@ -47,27 +45,30 @@ int	ft_state(t_philo *philo)
 	pthread_mutex_unlock(&philo->state_lock);
 	if (t >= philo->app->ttd && s != EAT)
 	{
-		logger(philo, "died");
+		pthread_mutex_lock(&philo->app->print);
+		set_end(philo);
+		logger2(philo, "died");
+		pthread_mutex_unlock(&philo->app->print);
 		update_state(philo, DIED);
-		set_end(philo->app);
 		return (DIED);
 	}
 	return (ALIVE);
 }
 
-void	set_end(t_prog *app)
+void	set_end(t_philo *philo)
 {
-	pthread_mutex_lock(&app->dead);
-	app->end = 1;
-	pthread_mutex_unlock(&app->dead);
+	pthread_mutex_lock(&philo->app->sim_end);
+	philo->app->end = 1;
+	ft_usleep(3);
+	pthread_mutex_unlock(&philo->app->sim_end);
 }
 
 int	check_end(t_philo *philo)
 {
 	int	end;
 
-	pthread_mutex_lock(&philo->app->dead);
+	pthread_mutex_lock(&philo->app->sim_end);
 	end = philo->app->end;
-	pthread_mutex_unlock(&philo->app->dead);
+	pthread_mutex_unlock(&philo->app->sim_end);
 	return (end);
 }
