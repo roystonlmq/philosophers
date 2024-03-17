@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 18:08:15 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:17:06 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	think(t_philo *philo)
 	if (ttt > 600)
 		ttt = 200;
 	update_state(philo, THINK);
-	printf("id: %d e: %d\n", philo->id, check_end(philo));
 	logger(philo, "is thinking");
 	ft_usleep(ttt);
 	update_state(philo, NONE);
@@ -63,7 +62,6 @@ void	psleep(t_philo *philo)
 
 	update_state(philo, SLEEP);
 	tts = philo->app->tts;
-	printf("id: %d e: %d\n", philo->id, check_end(philo));
 	logger(philo, "is sleeping");
 	ft_usleep(tts);
 	update_state(philo, NONE);
