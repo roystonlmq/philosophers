@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 14:17:49 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 15:16:57 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define THD_CREAT_FAIL "Thread create failed"
 # define THD_JOIN_FAIL "Thread join failed"
+# define USAGE "Usage: ./philo philo_nbr ttd tte tts [eat_limit]\n"
 
 typedef struct s_philo	t_philo;
 
