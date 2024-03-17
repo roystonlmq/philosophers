@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 13:19:28 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 14:26:14 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@ void	logger(t_philo *philo, char *s)
 
 void	think(t_philo *philo)
 {
-	// if (check_state(philo) == DIED)
-	// 	return ;
 	update_state(philo, THINK);
 	logger(philo, "is thinking");
-	// if (philo->app->philo_nbr % 2 != 0)
-	// 	ft_usleep(philo->app->tts);
-	// if (philo->app->philo_nbr > 105 && philo->id % 2 == 0)
-	// 	ft_usleep(philo->app->tts / 2);
+	if (philo->app->philo_nbr % 2 != 0)
+		ft_usleep(philo->app->tts);
+	if (philo->app->philo_nbr > 105 && philo->id % 2 == 0)
+		ft_usleep(philo->app->tts / 2);
 	update_state(philo, NONE);
 }
 
@@ -44,8 +42,6 @@ void	psleep(t_philo *philo)
 {
 	long	tts;
 
-	// if (check_state(philo) == DIED)
-	// 	return ;
 	update_state(philo, SLEEP);
 	tts = philo->app->tts;
 	logger(philo, "is sleeping");
@@ -55,20 +51,18 @@ void	psleep(t_philo *philo)
 
 void	eat(t_philo *philo)
 {
-	// if (check_state(philo) == DIED)
-	// 	return ;
-	pthread_mutex_lock(philo->left);
+	pthread_mutex_lock(philo->first);
 	logger(philo, "has taken a fork");
 	if (philo->app->philo_nbr == 1)
 	{
 		ft_usleep(philo->app->ttd);
-		pthread_mutex_unlock(philo->left);
+		pthread_mutex_unlock(philo->sec);
 		return ;
 	}
-	pthread_mutex_lock(philo->right);
+	pthread_mutex_lock(philo->sec);
 	logger(philo, "has taken a fork");
-	logger(philo, "is eating");
 	update_state(philo, EAT);
+	logger(philo, "is eating");
 	pthread_mutex_lock(&philo->app->meal);
 	philo->eat_count++;
 	philo->last_meal = get_time();
@@ -77,6 +71,6 @@ void	eat(t_philo *philo)
 	if (philo->app->ttd < philo->app->tte)
 		ft_usleep(philo->app->ttd);
 	update_state(philo, NONE);
-	pthread_mutex_unlock(philo->left);
-	pthread_mutex_unlock(philo->right);
+	pthread_mutex_unlock(philo->first);
+	pthread_mutex_unlock(philo->sec);
 }

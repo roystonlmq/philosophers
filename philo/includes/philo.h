@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 13:16:27 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 14:17:49 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ typedef struct s_prog
 
 struct	s_philo
 {
-	pthread_mutex_t		*left;
-	pthread_mutex_t		*right;
+	pthread_mutex_t		*first;
+	pthread_mutex_t		*sec;
 	pthread_mutex_t		state_lock;
 	pthread_t			tid;
 	t_prog				*app;
