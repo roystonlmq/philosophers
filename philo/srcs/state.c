@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:57:35 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 18:19:46 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:29:18 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	set_end(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->app->sim_end);
 	philo->app->end = 1;
-	ft_usleep(3);
+	ft_usleep(1);
 	pthread_mutex_unlock(&philo->app->sim_end);
 }
 
