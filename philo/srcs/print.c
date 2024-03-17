@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 15:05:05 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 15:10:24 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	think(t_philo *philo)
 	if (check_state(philo) == DIED)
 		return ;
 	pthread_mutex_lock(&philo->app->meal);
-	ttt = (philo->app->ttd - (get_time() - philo->last_meal) - 
-		philo->app->tte) / 2;
+	ttt = (philo->app->ttd - (get_time() - philo->last_meal)
+			- philo->app->tte) / 2;
 	pthread_mutex_unlock(&philo->app->meal);
 	if (ttt < 0)
 		ttt = 0;
@@ -50,8 +50,8 @@ void	think(t_philo *philo)
 		ttt = 200;
 	update_state(philo, THINK);
 	logger(philo, "is thinking");
-	update_state(philo, NONE);
 	ft_usleep(ttt);
+	update_state(philo, NONE);
 }
 
 void	psleep(t_philo *philo)
