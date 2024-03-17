@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 15:16:57 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:14:01 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_prog
 {
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
-	pthread_mutex_t	dead;
+	pthread_mutex_t	sim_end;
 	pthread_mutex_t	meal;
 	t_philo			*philos;
 	long			ttd;
@@ -58,7 +58,7 @@ typedef struct s_prog
 struct	s_philo
 {
 	pthread_mutex_t		*first;
-	pthread_mutex_t		*sec;
+	pthread_mutex_t		*second;
 	pthread_mutex_t		state_lock;
 	pthread_t			tid;
 	t_prog				*app;
@@ -109,12 +109,13 @@ int		ft_state(t_philo *philo);
 int		check_state(t_philo *philo);
 int		check_end(t_philo *app);
 void	update_state(t_philo *philo, int state);
-void	set_end(t_prog *app);
+void	set_end(t_philo *philo);
 
 /*
 print.c
 */
 void	logger(t_philo *philo, char *s);
+void	logger2(t_philo *philo, char *s);
 void	think(t_philo *philo);
 void	eat(t_philo *philo);
 void	psleep(t_philo *philo);
@@ -124,7 +125,7 @@ start.c
 */
 void	start(t_prog *app);
 void	*start_routine(void *arg);
-void	*monitor(void *arg);
+void	monitor(t_philo *philos);
 
 /*
 parser.c
