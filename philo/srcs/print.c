@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 15:10:24 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:06:38 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,20 @@
 void	logger(t_philo *philo, char *s)
 {
 	long	t;
-	int		e;
 
-	e = check_end(philo);
 	pthread_mutex_lock(&philo->app->print);
 	t = get_time() - philo->app->start;
-	if (e == 0 && t >= 0 && t <= LONG_MAX)
-	{
+	if (check_end(philo) == 0 && t >= 0 && t <= LONG_MAX)
 		printf("%ld %d %s\n", t, philo->id, s);
-	}
 	pthread_mutex_unlock(&philo->app->print);
+}
+
+void	logger2(t_philo *philo, char *s)
+{
+	long	t;
+
+	t = get_time() - philo->app->start;
+	printf("%ld %d %s\n", t, philo->id, s);
 }
 
 /*
@@ -36,8 +40,6 @@ void	think(t_philo *philo)
 {
 	long	ttt;
 
-	if (check_state(philo) == DIED)
-		return ;
 	pthread_mutex_lock(&philo->app->meal);
 	ttt = (philo->app->ttd - (get_time() - philo->last_meal)
 			- philo->app->tte) / 2;
@@ -49,6 +51,7 @@ void	think(t_philo *philo)
 	if (ttt > 600)
 		ttt = 200;
 	update_state(philo, THINK);
+	printf("id: %d e: %d\n", philo->id, check_end(philo));
 	logger(philo, "is thinking");
 	ft_usleep(ttt);
 	update_state(philo, NONE);
@@ -58,10 +61,9 @@ void	psleep(t_philo *philo)
 {
 	long	tts;
 
-	if (check_state(philo) == DIED)
-		return ;
 	update_state(philo, SLEEP);
 	tts = philo->app->tts;
+	printf("id: %d e: %d\n", philo->id, check_end(philo));
 	logger(philo, "is sleeping");
 	ft_usleep(tts);
 	update_state(philo, NONE);
@@ -69,8 +71,6 @@ void	psleep(t_philo *philo)
 
 void	eat(t_philo *philo)
 {
-	if (check_state(philo) == DIED)
-		return ;
 	pthread_mutex_lock(philo->first);
 	logger(philo, "has taken a fork");
 	if (philo->app->philo_nbr == 1)
