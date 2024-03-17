@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:43:39 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/15 23:07:03 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 12:59:48 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@ static void	init_forks(t_prog *app)
 	while (++i < philo_nbr)
 	{
 		pthread_mutex_init(&app->forks[i], NULL);
-		app->philos[i].left = &app->forks[(i + 1) % philo_nbr];
-		app->philos[i].right = &app->forks[i];
-		if (i % 2 == 0)
-		{
-			app->philos[i].left = &app->forks[i];
-			app->philos[i].right = &app->forks[(i + 1) % philo_nbr];
-		}
+		app->philos[i].left = &app->forks[i];
+		if (i == 0)
+			app->philos[i].right = &app->forks[philo_nbr - 1];
+		else
+			app->philos[i].right = &app->forks[i - 1];
 	}
 }
 
