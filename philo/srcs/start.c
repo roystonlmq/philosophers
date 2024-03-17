@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 18:14:55 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:20:10 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	monitor(t_philo *philos)
 	}
 	return ;
 }
+
 void	*start_routine(void *arg)
 {
 	t_philo	*philo;

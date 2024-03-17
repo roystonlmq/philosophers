@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:57:35 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 18:18:48 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:19:46 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	update_state(t_philo *philo, int state)
 	philo->state = state;
 	pthread_mutex_unlock(&philo->state_lock);
 }
-
 
 int	ft_state(t_philo *philo)
 {
