@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 14:26:14 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 15:05:05 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,39 @@ void	logger(t_philo *philo, char *s)
 	pthread_mutex_unlock(&philo->app->print);
 }
 
+/*
+formula for hunger:
+hunger = (time to die - time since last meal - time taken to eat)
+time to think is hunger / 2 for buffer
+*/
 void	think(t_philo *philo)
 {
+	long	ttt;
+
+	if (check_state(philo) == DIED)
+		return ;
+	pthread_mutex_lock(&philo->app->meal);
+	ttt = (philo->app->ttd - (get_time() - philo->last_meal) - 
+		philo->app->tte) / 2;
+	pthread_mutex_unlock(&philo->app->meal);
+	if (ttt < 0)
+		ttt = 0;
+	if (ttt == 0)
+		ttt = 1;
+	if (ttt > 600)
+		ttt = 200;
 	update_state(philo, THINK);
 	logger(philo, "is thinking");
-	if (philo->app->philo_nbr % 2 != 0)
-		ft_usleep(philo->app->tts);
-	if (philo->app->philo_nbr > 105 && philo->id % 2 == 0)
-		ft_usleep(philo->app->tts / 2);
 	update_state(philo, NONE);
+	ft_usleep(ttt);
 }
 
 void	psleep(t_philo *philo)
 {
 	long	tts;
 
+	if (check_state(philo) == DIED)
+		return ;
 	update_state(philo, SLEEP);
 	tts = philo->app->tts;
 	logger(philo, "is sleeping");
@@ -51,6 +69,8 @@ void	psleep(t_philo *philo)
 
 void	eat(t_philo *philo)
 {
+	if (check_state(philo) == DIED)
+		return ;
 	pthread_mutex_lock(philo->first);
 	logger(philo, "has taken a fork");
 	if (philo->app->philo_nbr == 1)
