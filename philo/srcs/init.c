@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:43:39 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 14:18:00 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:10:07 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static void	init_forks(t_prog *app)
 		if (i % 2 == 0)
 		{
 			app->philos[i].first = &app->forks[(i + 1) % philo_nbr];
-			app->philos[i].sec = &app->forks[i];
+			app->philos[i].second = &app->forks[i];
 		}
 		else
 		{
 			app->philos[i].first = &app->forks[i];
-			app->philos[i].sec = &app->forks[(i + 1) % philo_nbr];
+			app->philos[i].second = &app->forks[(i + 1) % philo_nbr];
 		}
 	}
 }
@@ -73,7 +73,7 @@ t_prog	*init_app(int ac, char **av)
 	init_forks(app);
 	app->end = 0;
 	pthread_mutex_init(&app->meal, NULL);
-	pthread_mutex_init(&app->dead, NULL);
+	pthread_mutex_init(&app->sim_end, NULL);
 	pthread_mutex_init(&app->print, NULL);
 	app->start = get_time();
 	return (app);
