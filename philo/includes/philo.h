@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 18:14:01 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:18:53 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	set_end(t_philo *philo);
 print.c
 */
 void	logger(t_philo *philo, char *s);
-void	logger2(t_philo *philo, char *s);
+void	dead_logger(t_philo *philo, char *s);
 void	think(t_philo *philo);
 void	eat(t_philo *philo);
 void	psleep(t_philo *philo);

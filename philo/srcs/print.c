@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 18:17:06 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:18:44 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	logger(t_philo *philo, char *s)
 	pthread_mutex_unlock(&philo->app->print);
 }
 
-void	logger2(t_philo *philo, char *s)
+void	dead_logger(t_philo *philo, char *s)
 {
 	long	t;
 
