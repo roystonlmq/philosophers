@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:43:39 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 18:10:07 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/18 21:16:43 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ static void	init_philos(t_prog *app)
 		app->philos[i].app = app;
 		app->philos[i].eat_count = 0;
 		app->philos[i].last_meal = get_time();
-		app->philos[i].state = NONE;
-		pthread_mutex_init(&app->philos[i].state_lock, NULL);
 	}
 }
 

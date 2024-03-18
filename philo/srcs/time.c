@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:24:40 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/16 12:01:32 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/18 21:47:42 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ long	get_time(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-int	ft_usleep(long time)
+int	ft_sleep(long time)
 {
 	long	start;
 

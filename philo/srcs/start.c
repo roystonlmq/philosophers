@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 18:20:10 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/18 21:57:38 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ static void	get_philo_ate_cnt(t_philo *philo, int *n)
 	pthread_mutex_unlock(&philo->app->meal);
 }
 
-void	monitor(t_philo *philos)
+void	*monitor(void *data)
 {
+	t_philo	*philos;
 	int		i;
 	int		n;
 	int		e;
 
+	philos = (t_philo *)data;
 	e = 1;
 	while (e)
 	{
@@ -44,7 +46,7 @@ void	monitor(t_philo *philos)
 				set_end(&philos[0]);
 		}
 	}
-	return ;
+	return (data);
 }
 
 void	*start_routine(void *arg)
@@ -52,19 +54,15 @@ void	*start_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->id % 2 == 0)
-		ft_usleep(1);
+
 	while (check_end(philo) == 0)
-	{
-		eat(philo);
-		psleep(philo);
-		think(philo);
-	}
+		eat_slp_think(philo);
 	return (arg);
 }
 
 void	start(t_prog *app)
 {
+	pthread_t	watch;
 	int			i;
 
 	i = -1;
@@ -72,7 +70,10 @@ void	start(t_prog *app)
 		if (pthread_create(&app->philos[i].tid, NULL, &start_routine, \
 				&app->philos[i]) != 0)
 			thread_exception(THD_CREAT_FAIL, app);
-	monitor(app->philos);
+	if (pthread_create(&watch, NULL, (void *)monitor, app->philos) != 0)
+		thread_exception(THD_CREAT_FAIL, app);
+	if (pthread_join(watch, NULL) != 0)
+		thread_exception(THD_JOIN_FAIL, app);
 	i = -1;
 	while (++i < app->philo_nbr)
 		if (pthread_join(app->philos[i].tid, NULL) != 0)

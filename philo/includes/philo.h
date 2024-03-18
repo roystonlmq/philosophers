@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 18:18:53 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/18 22:06:51 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h> // usleep, write
 # include <sys/time.h> // gettimeofday
 # include <limits.h> // INT_MAX
+# include <sys/types.h>
 
 # define THD_CREAT_FAIL "Thread create failed"
 # define THD_JOIN_FAIL "Thread join failed"
@@ -29,6 +30,7 @@ typedef struct s_philo	t_philo;
 
 typedef enum e_state
 {
+	READY,
 	THINK,
 	EAT,
 	SLEEP,
@@ -84,13 +86,13 @@ void	*ft_malloc(size_t size);
 time.c
 */
 long	get_time(void);
-int		ft_usleep(long time);
+int		ft_sleep(long time);
 
 /*
 error.c
 */
-void	exception(const char *s);
-void	thread_exception(const char *s, t_prog *app);
+int		exception(const char *s);
+int		thread_exception(const char *s, t_prog *app);
 
 /*
 init.c
@@ -106,9 +108,7 @@ void	free_app(t_prog *app);
 state.c
 */
 int		ft_state(t_philo *philo);
-int		check_state(t_philo *philo);
 int		check_end(t_philo *app);
-void	update_state(t_philo *philo, int state);
 void	set_end(t_philo *philo);
 
 /*
@@ -116,20 +116,18 @@ print.c
 */
 void	logger(t_philo *philo, char *s);
 void	dead_logger(t_philo *philo, char *s);
-void	think(t_philo *philo);
-void	eat(t_philo *philo);
-void	psleep(t_philo *philo);
+void	eat_slp_think(t_philo *philo);
 
 /*
 start.c
 */
 void	start(t_prog *app);
 void	*start_routine(void *arg);
-void	monitor(t_philo *philos);
+void	*monitor(void *data);
 
 /*
 parser.c
 */
-void	check_input(int ac, char **av);
+int	check_input(int ac, char **av);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 18:07:20 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 15:17:09 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/18 21:37:35 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int	main(int argc, char **argv)
 	t_prog	*app;
 
 	if (!(argc == 5 || argc == 6))
-		exception(USAGE);
-	check_input(argc, argv);
+		return(exception(USAGE));
+	if (check_input(argc, argv) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	app = init_app(argc, argv);
 	start(app);
 	free_app(app);

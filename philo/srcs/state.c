@@ -6,23 +6,11 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:57:35 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/17 18:29:18 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/18 21:23:09 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	check_state(t_philo *philo)
-{
-	int	s;
-
-	pthread_mutex_lock(&philo->state_lock);
-	s = philo->state;
-	pthread_mutex_unlock(&philo->state_lock);
-	if (s == DIED)
-		return (DIED);
-	return (ALIVE);
-}
 
 void	update_state(t_philo *philo, int state)
 {
@@ -34,21 +22,13 @@ void	update_state(t_philo *philo, int state)
 int	ft_state(t_philo *philo)
 {
 	long	t;
-	int		s;
 
 	pthread_mutex_lock(&philo->app->meal);
 	t = get_time() - philo->last_meal;
 	pthread_mutex_unlock(&philo->app->meal);
-	pthread_mutex_lock(&philo->state_lock);
-	s = philo->state;
-	pthread_mutex_unlock(&philo->state_lock);
-	if (t >= philo->app->ttd && s != EAT)
+	if (t > philo->app->ttd)
 	{
-		pthread_mutex_lock(&philo->app->print);
-		set_end(philo);
 		dead_logger(philo, "died");
-		pthread_mutex_unlock(&philo->app->print);
-		update_state(philo, DIED);
 		return (DIED);
 	}
 	return (ALIVE);
@@ -58,7 +38,6 @@ void	set_end(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->app->sim_end);
 	philo->app->end = 1;
-	ft_usleep(1);
 	pthread_mutex_unlock(&philo->app->sim_end);
 }
 
