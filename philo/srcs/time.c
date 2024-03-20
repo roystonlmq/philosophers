@@ -6,27 +6,26 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:24:40 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/18 21:47:42 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/19 18:18:58 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	get_time(void)
+long	get_current_ms(void)
 {
 	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL) == -1)
-		exception("gettimeofday failed\n");
+		return(exception("gettimeofday failed\n"));
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-int	ft_sleep(long time)
+void	ft_sleep(long time)
 {
 	long	start;
 
-	start = get_time();
-	while ((get_time() - start) < time)
-		usleep(time / 10);
-	return (0);
+	start = get_current_ms();
+	while ((get_current_ms() - start) < time)
+		usleep(100);
 }
