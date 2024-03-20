@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:24:40 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/20 18:20:56 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/20 18:44:38 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ long	get_current_ms(void)
 	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL) == -1)
-		return (exception("gettimeofday failed\n"));
+		write(2, "Error: gettimeofday\n", 19);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
