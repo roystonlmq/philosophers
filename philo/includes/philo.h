@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/20 18:46:30 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/20 19:29:07 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ struct	s_philo
 {
 	pthread_mutex_t		*first;
 	pthread_mutex_t		*second;
-	pthread_mutex_t		state_lock;
 	pthread_t			tid;
 	t_prog				*app;
 	long				last_meal;
@@ -74,8 +73,6 @@ struct	s_philo
 	int					id;
 	int					eat_count;
 	int					eat_limit;
-	int					state;
-	int					philo_nbr;
 };
 
 /*

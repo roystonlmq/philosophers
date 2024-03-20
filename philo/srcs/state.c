@@ -6,18 +6,11 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:57:35 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/19 18:13:54 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/20 19:26:52 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	update_state(t_philo *philo, int state)
-{
-	pthread_mutex_lock(&philo->state_lock);
-	philo->state = state;
-	pthread_mutex_unlock(&philo->state_lock);
-}
 
 int	ft_state(t_philo *philo)
 {

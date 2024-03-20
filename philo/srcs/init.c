@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:43:39 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/20 18:46:14 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/20 19:28:20 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	init_philos(t_prog *app)
 		app->philos[i].app = app;
 		app->philos[i].eat_count = 0;
 		app->philos[i].last_meal = 0;
-		app->philos[i].philo_start = 0;
 	}
 }
 
