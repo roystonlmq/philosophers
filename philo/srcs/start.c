@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/20 18:16:18 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/20 18:22:25 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	*start_routine(void *arg)
 	return (arg);
 }
 
-void	start(t_prog *app)
+int	start(t_prog *app)
 {
 	pthread_t	watch;
 	int			i;
@@ -68,7 +68,7 @@ void	start(t_prog *app)
 	while (++i < app->philo_nbr)
 		if (pthread_create(&app->philos[i].tid, NULL, &start_routine, \
 				&app->philos[i]) != 0)
-			thread_exception(THD_CREAT_FAIL, app);
+			return (thread_exception(THD_CREAT_FAIL, app));
 	i = -1;
 	app->start = get_current_ms();
 	while (++i < app->philo_nbr)
@@ -80,12 +80,12 @@ void	start(t_prog *app)
 	while (app->ready == NOT_RDY)
 		continue ;
 	if (pthread_create(&watch, NULL, &monitor, app->philos) != 0)
-		thread_exception(THD_CREAT_FAIL, app);
+		return (thread_exception(THD_CREAT_FAIL, app));
 	if (pthread_join(watch, NULL) != 0)
-		thread_exception(THD_JOIN_FAIL, app);
+		return (thread_exception(THD_JOIN_FAIL, app));
 	i = -1;
 	while (++i < app->philo_nbr)
 		if (pthread_join(app->philos[i].tid, NULL) != 0)
-			thread_exception(THD_JOIN_FAIL, app);
-	return ;
+			return (thread_exception(THD_JOIN_FAIL, app));
+	return (SUCCESS);
 }
