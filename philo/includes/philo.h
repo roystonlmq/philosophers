@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/20 18:16:47 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/20 18:19:56 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,6 @@ void	*monitor(void *data);
 /*
 parser.c
 */
-int	check_input(int ac, char **av);
+int		check_input(int ac, char **av);
 
 #endif
