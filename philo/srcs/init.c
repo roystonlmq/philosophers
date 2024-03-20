@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:43:39 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/19 23:21:23 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/20 18:16:36 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ t_prog	*init_app(int ac, char **av)
 	else
 		app->eat_limit = -1;
 	app->philos = ft_malloc(sizeof(t_philo) * app->philo_nbr);
-	app->thds = ft_malloc(sizeof(int) * app->philo_nbr);
 	app->forks = ft_malloc(sizeof(pthread_mutex_t) * app->philo_nbr);
 	init_philos(app);
 	init_forks(app);
