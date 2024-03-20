@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:43:35 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/20 18:20:13 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/20 19:47:54 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ int	check_input(int ac, char **av)
 		if (!ft_isnbr(av[i]))
 			return (exception("Invalid input\n"));
 	}
+	if (ac == 6 && ft_atol(av[5]) <= 0)
+		return (EXIT_FAILURE);
 	return (0);
 }
