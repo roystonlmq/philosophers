@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/19 23:21:51 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/20 18:16:18 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,11 @@ void	*start_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	while (philo->app->ready == NOT_RDY)
-	{
 		continue ;
-	}
 	if (philo->id % 2 == 0)
 		ft_sleep(1);
 	while (check_end(philo) == 0)
-	{
 		eat_slp_think(philo);
-	}
 	return (arg);
 }
 
