@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/20 19:05:38 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/20 19:55:10 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void	logger(t_philo *philo, char *s)
 {
 	long	t;
 
-	pthread_mutex_lock(&philo->app->time);
-	t = get_current_ms() - philo->app->start;
-	pthread_mutex_unlock(&philo->app->time);
 	pthread_mutex_lock(&philo->app->print);
 	if (check_end(philo) == 1)
 	{
 		pthread_mutex_unlock(&philo->app->print);
 		return ;
 	}
+	pthread_mutex_lock(&philo->app->time);
+	t = get_current_ms() - philo->app->start;
+	pthread_mutex_unlock(&philo->app->time);
 	printf("%ld %d %s\n", t, philo->id, s);
 	pthread_mutex_unlock(&philo->app->print);
 }
