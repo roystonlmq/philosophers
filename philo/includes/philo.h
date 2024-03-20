@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/20 18:19:56 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/20 18:23:03 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define THD_CREAT_FAIL "Thread create failed"
 # define THD_JOIN_FAIL "Thread join failed"
 # define USAGE "Usage: ./philo philo_nbr ttd tte tts [eat_limit]\n"
+# define SUCCESS 1
 
 typedef struct s_philo	t_philo;
 
@@ -78,11 +79,11 @@ struct	s_philo
 /*
 srcs/lib/wildcard.c
 */
+size_t	ft_strlen(const char *s);
 long	ft_atol(const char *str);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 int		ft_isnbr(const char *s);
-size_t	ft_strlen(const char *s);
 void	*ft_malloc(size_t size);
 
 /*
@@ -124,7 +125,7 @@ void	eat_slp_think(t_philo *philo);
 /*
 start.c
 */
-void	start(t_prog *app);
+int		start(t_prog *app);
 void	*start_routine(void *arg);
 void	*monitor(void *data);
 
