@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:43:39 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/18 21:16:43 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/19 23:21:23 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,12 @@ static void	init_forks(t_prog *app)
 	while (++i < philo_nbr)
 	{
 		pthread_mutex_init(&app->forks[i], NULL);
+		app->philos[i].first = &app->forks[i];
+		app->philos[i].second = &app->forks[(i + 1) % philo_nbr];
 		if (i % 2 == 0)
 		{
 			app->philos[i].first = &app->forks[(i + 1) % philo_nbr];
 			app->philos[i].second = &app->forks[i];
-		}
-		else
-		{
-			app->philos[i].first = &app->forks[i];
-			app->philos[i].second = &app->forks[(i + 1) % philo_nbr];
 		}
 	}
 }
@@ -45,7 +42,8 @@ static void	init_philos(t_prog *app)
 		app->philos[i].id = i + 1;
 		app->philos[i].app = app;
 		app->philos[i].eat_count = 0;
-		app->philos[i].last_meal = get_time();
+		app->philos[i].last_meal = 0;
+		app->philos[i].philo_start = 0;
 	}
 }
 
@@ -66,13 +64,15 @@ t_prog	*init_app(int ac, char **av)
 	else
 		app->eat_limit = -1;
 	app->philos = ft_malloc(sizeof(t_philo) * app->philo_nbr);
+	app->thds = ft_malloc(sizeof(int) * app->philo_nbr);
 	app->forks = ft_malloc(sizeof(pthread_mutex_t) * app->philo_nbr);
 	init_philos(app);
 	init_forks(app);
 	app->end = 0;
+	app->ready = NOT_RDY;
 	pthread_mutex_init(&app->meal, NULL);
 	pthread_mutex_init(&app->sim_end, NULL);
 	pthread_mutex_init(&app->print, NULL);
-	app->start = get_time();
+	app->start = get_current_ms();
 	return (app);
 }
