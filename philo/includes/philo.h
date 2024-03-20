@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/18 22:06:51 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/20 18:16:47 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_philo	t_philo;
 
 typedef enum e_state
 {
-	READY,
 	THINK,
 	EAT,
 	SLEEP,
@@ -39,6 +38,8 @@ typedef enum e_state
 	NOT_ALL_EATEN,
 	ALIVE,
 	NONE,
+	READY,
+	NOT_RDY
 }	t_state;
 
 typedef struct s_prog
@@ -54,6 +55,7 @@ typedef struct s_prog
 	long			start;
 	int				philo_nbr;
 	int				eat_limit;
+	int				ready;
 	int				end;
 }	t_prog;
 
@@ -65,6 +67,7 @@ struct	s_philo
 	pthread_t			tid;
 	t_prog				*app;
 	long				last_meal;
+	long				philo_start;
 	int					id;
 	int					eat_count;
 	int					eat_limit;
@@ -85,8 +88,8 @@ void	*ft_malloc(size_t size);
 /*
 time.c
 */
-long	get_time(void);
-int		ft_sleep(long time);
+long	get_current_ms(void);
+void	ft_sleep(long time);
 
 /*
 error.c
