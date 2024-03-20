@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:43:39 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/20 18:16:36 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/20 18:46:14 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_prog	*init_app(int ac, char **av)
 	pthread_mutex_init(&app->meal, NULL);
 	pthread_mutex_init(&app->sim_end, NULL);
 	pthread_mutex_init(&app->print, NULL);
-	app->start = get_current_ms();
+	pthread_mutex_init(&app->time, NULL);
+	pthread_mutex_init(&app->thds_rdy, NULL);
 	return (app);
 }
