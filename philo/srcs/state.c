@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:57:35 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/18 21:23:09 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/19 18:13:54 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_state(t_philo *philo)
 	long	t;
 
 	pthread_mutex_lock(&philo->app->meal);
-	t = get_time() - philo->last_meal;
+	t = get_current_ms() - philo->last_meal;
 	pthread_mutex_unlock(&philo->app->meal);
 	if (t > philo->app->ttd)
 	{
