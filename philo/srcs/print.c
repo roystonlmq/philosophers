@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/21 19:54:01 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/21 19:58:26 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ void	dead_logger(t_philo *philo, char *s)
 {
 	long	t;
 
-	t = get_current_ms() - philo->app->start;
 	pthread_mutex_lock(&philo->app->print);
+	pthread_mutex_lock(&philo->app->time);
+	t = get_current_ms() - philo->app->start;
 	set_end(philo);
 	printf("%ld %d %s\n", t, philo->id, s);
+	pthread_mutex_unlock(&philo->app->time);
 	pthread_mutex_unlock(&philo->app->print);
 }
 
