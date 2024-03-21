@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/21 18:57:24 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/21 19:54:58 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	*start_routine(void *arg)
 		pthread_mutex_unlock(&philo->app->thds_rdy);
 		continue ;
 	}
+	if (philo->id % 2 != 0)
+		ft_sleep(1);
 	while (check_end(philo) == 0)
 		eat_slp_think(philo);
 	return (arg);
