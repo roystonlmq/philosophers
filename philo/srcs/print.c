@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/23 13:14:59 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/23 13:19:03 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	dead_logger(t_philo *philo, char *s, long t)
 	set_end(philo);
 }
 
-
 static void	one_philo(t_philo *philo)
 {
 	ft_sleep(philo->app->ttd);
@@ -63,11 +62,11 @@ void	eat_slp_think(t_philo *philo, int to_slp)
 	logger(philo, "has taken a fork", "is eating");
 	pthread_mutex_lock(&philo->app->meal);
 	philo->last_meal = get_current_ms();
-	philo->eat_count++;
 	pthread_mutex_unlock(&philo->app->meal);
 	ft_sleep(philo->app->tte);
-	// pthread_mutex_lock(&philo->app->meal);
-	// pthread_mutex_unlock(&philo->app->meal);
+	pthread_mutex_lock(&philo->app->meal);
+	philo->eat_count++;
+	pthread_mutex_unlock(&philo->app->meal);
 	pthread_mutex_unlock(philo->first);
 	pthread_mutex_unlock(philo->second);
 	if (to_slp)
