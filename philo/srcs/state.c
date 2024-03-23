@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:57:35 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/20 19:26:52 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/23 13:12:54 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_state(t_philo *philo)
 	pthread_mutex_unlock(&philo->app->meal);
 	if (t > philo->app->ttd)
 	{
-		dead_logger(philo, "died");
+		dead_logger(philo, "died", get_current_ms() - philo->philo_start);
 		return (DIED);
 	}
 	return (ALIVE);
