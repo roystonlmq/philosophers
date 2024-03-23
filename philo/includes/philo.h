@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/23 00:04:32 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/23 12:37:14 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ struct	s_philo
 	long				philo_start;
 	int					id;
 	int					eat_count;
-	int					eat_limit;
 };
 
 /*
@@ -111,8 +110,9 @@ void	set_end(t_philo *philo);
 print.c
 */
 void	logger(t_philo *philo, char *s, char *s2);
-void	dead_logger(t_philo *philo, char *s);
-void	eat_slp_think(t_philo *philo);
+void	dead_logger(t_philo *philo, char *s, long t);
+void	slp_think(t_philo *philo);
+void	eat_slp_think(t_philo *philo, int to_slp);
 
 /*
 start.c
