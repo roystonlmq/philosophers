@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/23 00:05:56 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/23 11:03:16 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	slp_think(t_philo *philo)
 static void	one_philo(t_philo *philo)
 {
 	ft_sleep(philo->app->ttd);
-	dead_logger(philo, "died");
+	// dead_logger(philo, "died");
 	pthread_mutex_unlock(philo->first);
 }
 
