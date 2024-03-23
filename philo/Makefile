@@ -6,7 +6,7 @@
 #    By: roylee <roylee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 16:22:42 by roylee          #+#    #+#              #
-#    Updated: 2024/03/10 14:57:27 by roylee           ###   ########.fr        #
+#    Updated: 2024/03/23 14:23:40 by roylee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	philo
 
 CC			=	gcc
 INCLUDE 	=	includes
-CFLAGS		=	-Wall -Wextra -Werror -I$(INCLUDE) -g -fsanitize=thread
+CFLAGS		=	-Wall -Wextra -Werror -I$(INCLUDE) -g #-fsanitize=address
 RM			=	rm -f
 SRCS		=	main.c \
 				srcs/error.c srcs/init.c srcs/parser.c srcs/time.c \
