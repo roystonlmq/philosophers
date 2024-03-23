@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/23 11:06:20 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/23 13:14:59 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +30,30 @@ void	logger(t_philo *philo, char *s, char *s2)
 	pthread_mutex_unlock(&philo->app->print);
 }
 
-void	dead_logger(t_philo *philo, char *s)
+void	dead_logger(t_philo *philo, char *s, long t)
 {
-	long	t;
-
 	pthread_mutex_lock(&philo->app->print);
-	t = get_current_ms() - philo->philo_start;
-	set_end(philo);
 	printf("%ld %d %s\n", t, philo->id, s);
 	pthread_mutex_unlock(&philo->app->print);
+	set_end(philo);
 }
 
-static void	slp_think(t_philo *philo)
-{
-	long	tts;
-
-	tts = philo->app->tts;
-	logger(philo, "is sleeping", 0);
-	ft_sleep(tts);
-	logger(philo, "is thinking", 0);
-}
 
 static void	one_philo(t_philo *philo)
 {
 	ft_sleep(philo->app->ttd);
 	pthread_mutex_unlock(philo->first);
+	set_end(philo);
 }
 
-void	eat_slp_think(t_philo *philo)
+void	slp_think(t_philo *philo)
+{
+	logger(philo, "is sleeping", 0);
+	ft_sleep(philo->app->tts);
+	logger(philo, "is thinking", 0);
+}
+
+void	eat_slp_think(t_philo *philo, int to_slp)
 {
 	pthread_mutex_lock(philo->first);
 	logger(philo, "has taken a fork", 0);
@@ -67,12 +63,13 @@ void	eat_slp_think(t_philo *philo)
 	logger(philo, "has taken a fork", "is eating");
 	pthread_mutex_lock(&philo->app->meal);
 	philo->last_meal = get_current_ms();
-	pthread_mutex_unlock(&philo->app->meal);
-	ft_sleep(philo->app->tte);
-	pthread_mutex_lock(&philo->app->meal);
 	philo->eat_count++;
 	pthread_mutex_unlock(&philo->app->meal);
+	ft_sleep(philo->app->tte);
+	// pthread_mutex_lock(&philo->app->meal);
+	// pthread_mutex_unlock(&philo->app->meal);
 	pthread_mutex_unlock(philo->first);
 	pthread_mutex_unlock(philo->second);
-	slp_think(philo);
+	if (to_slp)
+		slp_think(philo);
 }
