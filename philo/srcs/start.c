@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/23 10:40:48 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/23 13:10:33 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	*monitor(void *data)
 				flag = 0;
 		}
 	}
+	set_end(&philos[0]);
 	return (data);
 }
 
@@ -66,11 +67,18 @@ void	*start_routine(void *arg)
 			break ;
 		}
 		pthread_mutex_unlock(&philo->app->thds_rdy);
-		continue ;
 	}
-
-	while (check_end(philo) == 0)
-		eat_slp_think(philo);
+	if (philo->id % 2 == 0)
+		while (check_end(philo) == 0)
+			eat_slp_think(philo, 1);
+	else
+	{
+		while (check_end(philo) == 0)
+		{
+			slp_think(philo);
+			eat_slp_think(philo, 0);
+		}
+	}
 	return (arg);
 }
 
