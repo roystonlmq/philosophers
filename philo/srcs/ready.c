@@ -6,16 +6,14 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 14:09:13 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/24 14:13:47 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/24 16:02:23 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	even_odd_start(t_prog *app)
+void	wait_thds(t_prog *app)
 {
-	if (app->philo_nbr % 2 != 0)
-		return ;
 	while (1)
 	{
 		pthread_mutex_lock(&app->thds_rdy);

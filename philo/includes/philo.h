@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/24 14:13:55 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/24 16:02:31 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	eat_slp_think(t_philo *philo, int to_slp);
 /*
 ready.c - subroutine functions for start.c
 */
-void	even_odd_start(t_prog *app);
+void	wait_thds(t_prog *app);
 void	app_ready(t_prog *app);
 
 /*
