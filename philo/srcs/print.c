@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/24 14:51:04 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/24 16:01:48 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ void	slp_think(t_philo *philo)
 	logger(philo, "is sleeping", 0);
 	ft_sleep(philo->app->tts);
 	logger(philo, "is thinking", 0);
-	ttt = get_current_ms() - philo->app->tte - philo->last_meal;
-	if (ttt > 3)
-		ft_sleep(5);
+	ttt = philo->app->ttd - (get_current_ms() - 
+			philo->app->tte - philo->last_meal);
+	if (ttt > 2)
+		ft_sleep(2);
 }
 
 void	eat_slp_think(t_philo *philo, int to_slp)
