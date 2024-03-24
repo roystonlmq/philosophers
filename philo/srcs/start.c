@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/24 14:13:38 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/24 15:29:45 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ int	start(t_prog *app)
 		if (pthread_create(&app->philos[i].tid, NULL, &start_routine, \
 				&app->philos[i]) != 0)
 			return (thread_exception(THD_CREAT_FAIL, app));
-	if (app->philo_nbr % 2 == 0)
-		app_ready(app);
+	app_ready(app);
 	if (pthread_create(&watch, NULL, &monitor, app->philos) != 0)
 		return (thread_exception(THD_CREAT_FAIL, app));
 	if (pthread_join(watch, NULL) != 0)
