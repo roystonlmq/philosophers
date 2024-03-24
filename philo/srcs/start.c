@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/23 13:53:02 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/24 14:13:38 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,7 @@ void	*start_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	while (1)
-	{
-		pthread_mutex_lock(&philo->app->thds_rdy);
-		if (philo->app->ready == READY)
-		{
-			pthread_mutex_unlock(&philo->app->thds_rdy);
-			break ;
-		}
-		pthread_mutex_unlock(&philo->app->thds_rdy);
-	}
+	even_odd_start(philo->app);
 	if (philo->id % 2 == 0 || philo->app->philo_nbr == 1)
 		while (check_end(philo) == 0)
 			eat_slp_think(philo, 1);
@@ -82,28 +73,6 @@ void	*start_routine(void *arg)
 	return (arg);
 }
 
-static void	app_ready(t_prog *app)
-{
-	int		i;
-
-	app->start = 0;
-	i = -1;
-	while (++i < app->philo_nbr)
-	{
-		if (i == app->philo_nbr - 1)
-			app->start = get_current_ms();
-	}
-	i = -1;
-	while (++i < app->philo_nbr)
-	{
-		app->philos[i].philo_start = app->start;
-		app->philos[i].last_meal = app->start;
-	}
-	pthread_mutex_lock(&app->thds_rdy);
-	app->ready = READY;
-	pthread_mutex_unlock(&app->thds_rdy);
-}
-
 int	start(t_prog *app)
 {
 	pthread_t	watch;
@@ -114,7 +83,8 @@ int	start(t_prog *app)
 		if (pthread_create(&app->philos[i].tid, NULL, &start_routine, \
 				&app->philos[i]) != 0)
 			return (thread_exception(THD_CREAT_FAIL, app));
-	app_ready(app);
+	if (app->philo_nbr % 2 == 0)
+		app_ready(app);
 	if (pthread_create(&watch, NULL, &monitor, app->philos) != 0)
 		return (thread_exception(THD_CREAT_FAIL, app));
 	if (pthread_join(watch, NULL) != 0)
