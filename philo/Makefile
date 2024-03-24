@@ -18,7 +18,7 @@ CFLAGS		=	-Wall -Wextra -Werror -I$(INCLUDE) -g #-fsanitize=address
 RM			=	rm -f
 SRCS		=	main.c \
 				srcs/error.c srcs/init.c srcs/parser.c srcs/time.c \
-				srcs/start.c srcs/print.c srcs/free.c srcs/state.c \
+				srcs/ready.c srcs/start.c srcs/print.c srcs/free.c srcs/state.c \
 				srcs/lib/ft_atoi.c srcs/lib/ft_strlen.c srcs/lib/ft_isdigit.c \
 				srcs/lib/ft_malloc.c
 
