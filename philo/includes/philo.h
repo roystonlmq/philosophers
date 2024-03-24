@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:58:36 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/23 12:37:14 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/24 14:13:55 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,12 @@ void	logger(t_philo *philo, char *s, char *s2);
 void	dead_logger(t_philo *philo, char *s, long t);
 void	slp_think(t_philo *philo);
 void	eat_slp_think(t_philo *philo, int to_slp);
+
+/*
+ready.c - subroutine functions for start.c
+*/
+void	even_odd_start(t_prog *app);
+void	app_ready(t_prog *app);
 
 /*
 start.c
