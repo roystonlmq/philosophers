@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:57:50 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/26 21:15:20 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/26 21:39:23 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	slp_think(t_philo *philo)
 	logger(philo, "is sleeping", 0);
 	ft_sleep(philo->app->tts);
 	logger(philo, "is thinking", 0);
+	usleep(500);
 }
 
 void	eat_slp_think(t_philo *philo, int to_slp)
