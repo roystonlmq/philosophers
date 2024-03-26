@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:50:41 by roylee            #+#    #+#             */
-/*   Updated: 2024/03/24 16:02:34 by roylee           ###   ########.fr       */
+/*   Updated: 2024/03/26 21:16:27 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	*start_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	wait_thds(philo->app);
+	if (philo->app->philo_nbr % 2 == 0)
+		wait_thds(philo->app);
 	if (philo->id % 2 == 0 || philo->app->philo_nbr == 1)
 		while (check_end(philo) == 0)
 			eat_slp_think(philo, 1);
@@ -83,7 +84,8 @@ int	start(t_prog *app)
 		if (pthread_create(&app->philos[i].tid, NULL, &start_routine, \
 				&app->philos[i]) != 0)
 			return (thread_exception(THD_CREAT_FAIL, app));
-	app_ready(app);
+	if (app->philo_nbr % 2 == 0)
+		app_ready(app);
 	if (pthread_create(&watch, NULL, &monitor, app->philos) != 0)
 		return (thread_exception(THD_CREAT_FAIL, app));
 	if (pthread_join(watch, NULL) != 0)
